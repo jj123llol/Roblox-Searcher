@@ -1,8 +1,17 @@
 <script>
 async function PlayerInfo(plr){
-  var link = "https://users.roblox.com/v1/users/" + plr
-  var info = await fetch(link)
-  console.log(info)
+	try{
+  	var link = "https://users.roblox.com/v1/users/" + plr
+  	console.log(link)
+ 	 	var info = await fetch(link)
+  	if (!info.ok) {
+ 	   throw new Error(`Response status: ${info.status}`);
+ 	 	}
+ 		const json = await info.json();
+ 	 	alert(json)
+  }catch (error){
+  	console.log(error.message)
+  }
 }
 
 
