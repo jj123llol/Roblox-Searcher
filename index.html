@@ -16,10 +16,19 @@
 </html>
 
 <script>
+
+		async function UserToUserId(User){
+    	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/search?keyword=' + User + "&limit=10")}`)).json()
+    }
     async function PlayerInfo(plr) {
 				if (String(Number(plr)) == String(Number("z"))){
-        	console.log("Erm")
-        	alert("Enter A UserID! Username Support soon.")
+        	user = await UserToUserId(plr)
+          var data = user.contents
+          if (data.includes("Too many")){
+          	alert("Too Many Requests")
+          }
+          userid = user.contents.split('id')[1].split(",")[0].replace('":', "")
+        	plr = userid
         }
         try {
             return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
