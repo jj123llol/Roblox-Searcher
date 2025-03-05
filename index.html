@@ -21,6 +21,7 @@
     	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/search?keyword=' + User + "&limit=10")}`)).json()
     }
     async function PlayerInfo(plr) {
+ document.getElementById("InfoBox").innerHTML = "searchin.."
 				if (String(Number(plr)) == String(Number("z"))){
         	user = await UserToUserId(plr)
           var data = user.contents
