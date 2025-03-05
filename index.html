@@ -39,7 +39,7 @@
     }
 
     function addToList(list, Main, Sub) {
-        Sub = Sub.replace(",", '').replace(":", '')
+        Sub = Sub.replace(",", '').replace(":", '').replace("\n", "<br/>")
         list.push(Main + Sub)
     }
 
