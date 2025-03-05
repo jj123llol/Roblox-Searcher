@@ -24,8 +24,9 @@
 				if (String(Number(plr)) == String(Number("z"))){
         	user = await UserToUserId(plr)
           var data = user.contents
-          if (data.includes("Too many")){
-          	alert("Too Many Requests")
+          while (data.includes("Too many")){
+          	user = await UserToUserId(plr)
+           data = user.contents
           }
           userid = user.contents.split('id')[1].split(",")[0].replace('":', "")
         	plr = userid
