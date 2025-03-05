@@ -12,8 +12,9 @@
 </html>
 
 <script>
+// my code lowkey ass
 async function PlayerInfo(plr){
-	 console.log('Searching Player ' + plr)
+   console.log('Searching Player ' + plr)
    try{
    	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
    }
@@ -33,8 +34,8 @@ var ImportantPlayerInfo = {
 }
 
 function Extract_Player_Info(info){
-	var ar = []
-	var TrueInfo
+  var ar = []
+  var TrueInfo
   var ToExtract = info.split('"')
   ar.push("Display: " + ToExtract[23])
   ar.push("Name: " + ToExtract[19])
@@ -42,7 +43,7 @@ function Extract_Player_Info(info){
   ar.push("id: " + ToExtract[16])
   ar.push("Are They Banned?: " + ToExtract[10])
   ar.push("Created: " + ToExtract[7])
-  TrueInfo = ar.join("<br/>")
+  TrueInfo = ar.join("<br/><br/><br/>")
   return TrueInfo
 }
 
@@ -50,8 +51,8 @@ var Searchedinfo
 document.getElementById("SearchPlayer").onclick = function(){
 	(async() => {
   	var info = await PlayerInfo(document.getElementById("PlayerSearch").value)
-    info = Extract_Player_Info(info.contents)
-    document.getElementById("PlayerInfoBox").innerHTML = info
+        info = Extract_Player_Info(info.contents)
+	document.getElementById("PlayerInfoBox").innerHTML = info
   })()
 }
 
