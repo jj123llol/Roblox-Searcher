@@ -34,20 +34,21 @@
         "Display": 23
     }
 
-    function addToList(List, Main, Sub) {
-        list.push(Main + Sub.remove(",").remove(":"))
+    function addToList(list, Main, Sub) {
+        Sub = Sub.replace(",", '').replace(":", '')
+        list.push(Main + Sub)
     }
 
     function Extract_Player_Info(info) {
         var ar = []
         var TrueInfo
         var ToExtract = info.split('"')
-        addToList(ar, "Display: " + ToExtract[23])
-        addToList(ar, "Name: " + ToExtract[19])
-        addToList(ar, "Description: " + ToExtract[3])
-        addToList(ar, "id: " + ToExtract[16])
-        addToList(ar, "Are They Banned?: " + ToExtract[10])
-        addToList(ar, "Created: " + ToExtract[7])
+        addToList(ar, "Display: ", ToExtract[23])
+        addToList(ar, "Name: ", ToExtract[19])
+        addToList(ar, "Description: ", ToExtract[3])
+        addToList(ar, "id: ", ToExtract[16])
+        addToList(ar, "Are They Banned?: ", ToExtract[10])
+        addToList(ar, "Created: ", ToExtract[7])
         TrueInfo = ar.join("<br/><br/><br/>")
         return TrueInfo
     }
