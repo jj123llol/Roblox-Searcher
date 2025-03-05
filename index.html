@@ -1,28 +1,30 @@
 <html>
-<textbox>
-  Player Id
-</textbox>
+<input id="PlayerSearch" type="text">
 
-<button>
-  Search
+<button id="SearchPlayer">
+  SearchPlayer
 </button>
 
 </html>
 
 <script>
 async function PlayerInfo(plr){
+	 console.log('Searching Player ' + plr)
    try{
-      var link = "https://users.roblox.com/v1/users/" + plr
-      console.log(link)
-      var info = await fetch(link)
-      if (!info.ok) {
- 	throw new Error(`Response status: ${info.status}`);
-      }
-      const json = await info.json();
-      alert(json)
-   }catch (error){
-      alert(error.message)
+   	return (await fetch("https://users.roblox.com/v1/users/" + plr)).json()
+   }
+   catch (error){
+   	alert(error.message)
    }
 }
+
+var Searchedinfo
+document.getElementById("SearchPlayer").onclick = function(){
+	(async() => {
+  	var info = await PlayerInfo(document.getElementById("PlayerSearch").value)
+    Searchedinfo = info
+  })()
+}
+
 
 </script>
