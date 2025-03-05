@@ -17,6 +17,11 @@
 
 <script>
     async function PlayerInfo(plr) {
+    		try{
+        	Number(plr)
+        }catch(){
+        	fetch("Use A UserID!")
+        }
         try {
             return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
         } catch (error) {
