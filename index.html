@@ -1,19 +1,22 @@
 <html>
-<input id="PlayerSearch" type="text" value="Player Id" >
+<select name="Search For" id="picker">
+ <option value="Player">Player</option>
+  <option value="Game">Game</option>
+</select>
+<input id="SearchBar" type="text" value="Game Or Player ID" >
 
-<button id="SearchPlayer">
-  Search Player
+<button id="Search">
+  Search
 </button>
 
 <div>
 </div>
-<textbox id = "PlayerInfoBox"> </textbox>
+<textbox id = "InfoBox"> </textbox>
 
 </html>
 
 <script>
 async function PlayerInfo(plr){
-	 console.log('Searching Player ' + plr)
    try{
    	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
    }
@@ -42,17 +45,22 @@ function Extract_Player_Info(info){
   ar.push("id: " + ToExtract[16])
   ar.push("Are They Banned?: " + ToExtract[10])
   ar.push("Created: " + ToExtract[7])
-  TrueInfo = ar.join("<br/>")
+  TrueInfo = ar.join("<br/><br/><br/>")
   return TrueInfo
 }
 
 var Searchedinfo
-document.getElementById("SearchPlayer").onclick = function(){
-	(async() => {
-  	var info = await PlayerInfo(document.getElementById("PlayerSearch").value)
-    info = Extract_Player_Info(info.contents)
-    document.getElementById("PlayerInfoBox").innerHTML = info
-  })()
+document.getElementById("Search").onclick = function(){
+	if (document.getElementById("picker").value == "Player"){
+		(async() => {
+  		var info = await PlayerInfo(document.getElementById("SearchBar").value)
+  	  info = Extract_Player_Info(info.contents)
+  	  document.getElementById("InfoBox").innerHTML = info
+ 	 })()
+  }
+  else if (document.getElementById("picker").value == "Game"){
+  	document.getElementById("InfoBox").innerHTML = "Soon"
+  }
 }
 
 
