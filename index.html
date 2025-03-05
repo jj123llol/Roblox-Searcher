@@ -5,27 +5,55 @@
   Search Player
 </button>
 
+<div>
+</div>
+<textbox id = "PlayerInfoBox">
+  Info Will Appear Here
+</textbox>
+
 </html>
 
 <script>
 async function PlayerInfo(plr){
 	 console.log('Searching Player ' + plr)
    try{
-   	return (await fetch('https://proxy.cors.sh/https://users.roblox.com/v1/users/' + plr, {
-    	headers: {'x-cors-api-key': 'temp_33e0f45adf8381d38ec807c9013ad9'}
-    }
-    )).json()
+   	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
    }
    catch (error){
    	alert(error.message)
    }
 }
 
+var ImportantPlayerInfo = {
+ "Description": 3,
+ "Created": 7,
+ "Banned": 10,
+ "Verified": 14,
+ "id": 16,
+ "Name": 19,
+ "Display": 23
+}
+
+function Extract_Player_Info(info){
+	var ar = []
+	var TrueInfo
+  var ToExtract = info.split('"')
+  ar.push("Display: " + ToExtract[23])
+  ar.push("Name: " + ToExtract[19])
+  ar.push("Description: " + ToExtract[3])
+  ar.push("id: " + ToExtract[16])
+  ar.push("Are They Banned?: " + ToExtract[10])
+  ar.push("Created: " + ToExtract[7])
+  TrueInfo = ar.join("\n")
+  return TrueInfo
+}
+
 var Searchedinfo
 document.getElementById("SearchPlayer").onclick = function(){
 	(async() => {
   	var info = await PlayerInfo(document.getElementById("PlayerSearch").value)
-    console.log(info)
+    info = Extract_Player_Info(info.contents)
+    document.getElementById("PlayerInfoBox").innerHTML = info
   })()
 }
 
