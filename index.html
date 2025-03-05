@@ -1,67 +1,67 @@
 <html>
 <select name="Search For" id="picker">
- <option value="Player">Player</option>
-  <option value="Game">Game</option>
+    <option value="Player">Player</option>
+    <option value="Game">Game</option>
 </select>
-<input id="SearchBar" type="text" value="Game Or Player ID" >
+<input id="SearchBar" type="text" value="Game Or Player ID">
 
 <button id="Search">
-  Search
+    Search
 </button>
 
 <div>
 </div>
-<textbox id = "InfoBox"> </textbox>
+<textbox id="InfoBox"> </textbox>
 
 </html>
 
 <script>
-async function PlayerInfo(plr){
-   try{
-   	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
-   }
-   catch (error){
-   	alert(error.message)
-   }
-}
+    async function PlayerInfo(plr) {
+        try {
+            return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
-var ImportantPlayerInfo = {
- "Description": 3,
- "Created": 7,
- "Banned": 10,
- "Verified": 14,
- "id": 16,
- "Name": 19,
- "Display": 23
-}
+    var ImportantPlayerInfo = {
+        "Description": 3,
+        "Created": 7,
+        "Banned": 10,
+        "Verified": 14,
+        "id": 16,
+        "Name": 19,
+        "Display": 23
+    }
 
-function Extract_Player_Info(info){
-	var ar = []
-	var TrueInfo
-  var ToExtract = info.split('"')
-  ar.push("Display: " + ToExtract[23])
-  ar.push("Name: " + ToExtract[19])
-  ar.push("Description: " + ToExtract[3])
-  ar.push("id: " + ToExtract[16])
-  ar.push("Are They Banned?: " + ToExtract[10])
-  ar.push("Created: " + ToExtract[7])
-  TrueInfo = ar.join("<br/><br/><br/>")
-  return TrueInfo
-}
+    function addToList(List, Main, Sub) {
+        list.push(Main + Sub.remove(",").remove(":"))
+    }
 
-var Searchedinfo
-document.getElementById("Search").onclick = function(){
-	if (document.getElementById("picker").value == "Player"){
-		(async() => {
-  		var info = await PlayerInfo(document.getElementById("SearchBar").value)
-  	  info = Extract_Player_Info(info.contents)
-  	  document.getElementById("InfoBox").innerHTML = info
- 	 })()
-  }
-  else if (document.getElementById("picker").value == "Game"){
-  	document.getElementById("InfoBox").innerHTML = "Soon"
-  }
-}
+    function Extract_Player_Info(info) {
+        var ar = []
+        var TrueInfo
+        var ToExtract = info.split('"')
+        addToList(ar, "Display: " + ToExtract[23])
+        addToList(ar, "Name: " + ToExtract[19])
+        addToList(ar, "Description: " + ToExtract[3])
+        addToList(ar, "id: " + ToExtract[16])
+        addToList(ar, "Are They Banned?: " + ToExtract[10])
+        addToList(ar, "Created: " + ToExtract[7])
+        TrueInfo = ar.join("<br/><br/><br/>")
+        return TrueInfo
+    }
 
-
+    var Searchedinfo
+    document.getElementById("Search").onclick = function() {
+        if (document.getElementById("picker").value == "Player") {
+            (async () => {
+                var info = await PlayerInfo(document.getElementById("SearchBar").value)
+                info = Extract_Player_Info(info.contents)
+                document.getElementById("InfoBox").innerHTML = info
+            })()
+        } else if (document.getElementById("picker").value == "Game") {
+            document.getElementById("InfoBox").innerHTML = "Soon"
+        }
+    }
 </script>
