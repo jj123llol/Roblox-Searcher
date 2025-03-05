@@ -7,15 +7,11 @@
 
 <div>
 </div>
-<textbox id = "PlayerInfoBox">
-  Info Will Appear Here
-</textbox>
+<textbox id = "PlayerInfoBox"> </textbox>
 
 </html>
 
 <script>
-
-// This Code Is Ass!
 async function PlayerInfo(plr){
 	 console.log('Searching Player ' + plr)
    try{
@@ -46,7 +42,7 @@ function Extract_Player_Info(info){
   ar.push("id: " + ToExtract[16])
   ar.push("Are They Banned?: " + ToExtract[10])
   ar.push("Created: " + ToExtract[7])
-  TrueInfo = ar.join("\n")
+  TrueInfo = ar.join("<br/>")
   return TrueInfo
 }
 
