@@ -1,0 +1,10 @@
+<script>
+async function PlayerInfo(plr){
+  var link = "https://users.roblox.com/v1/users/" + plr
+  var info = await fetch(link)
+  console.log(info)
+}
+
+
+var InfoJson = PlayerInfo(1)
+</script>
