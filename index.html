@@ -17,6 +17,10 @@
 
 <script>
     async function PlayerInfo(plr) {
+				if (String(Number(plr)) == String(Number("z"))){
+        	console.log("Erm")
+        	alert("Enter A UserID! Username Support soon.")
+        }
         try {
             return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
         } catch (error) {
