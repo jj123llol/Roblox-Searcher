@@ -2,7 +2,7 @@
 <input id="PlayerSearch" type="text">
 
 <button id="SearchPlayer">
-  SearchPlayer
+  Search Player
 </button>
 
 </html>
@@ -11,7 +11,10 @@
 async function PlayerInfo(plr){
 	 console.log('Searching Player ' + plr)
    try{
-   	return (await fetch("https://users.roblox.com/v1/users/" + plr)).json()
+   	return (await fetch('https://proxy.cors.sh/https://users.roblox.com/v1/users/' + plr, {
+    	headers: {'x-cors-api-key': 'temp_33e0f45adf8381d38ec807c9013ad9'}
+    }
+    )).json()
    }
    catch (error){
    	alert(error.message)
@@ -22,7 +25,7 @@ var Searchedinfo
 document.getElementById("SearchPlayer").onclick = function(){
 	(async() => {
   	var info = await PlayerInfo(document.getElementById("PlayerSearch").value)
-    Searchedinfo = info
+    console.log(info)
   })()
 }
 
