@@ -33,7 +33,7 @@ html, body {
     	return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/search?keyword=' + User + "&limit=10")}`)).json()
     }
     async function PlayerInfo(plr) {
- document.getElementById("InfoBox").innerHTML = "searchin.."
+ document.getElementById("InfoBox").innerHTML = "searching..(you might be rate limited by roblox :broken_heart:)"
 				if (String(Number(plr)) == String(Number("z"))){
         	user = await UserToUserId(plr)
           var data = user.contents
