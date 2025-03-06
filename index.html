@@ -45,11 +45,22 @@ html, body {
         	plr = userid
         }
         try {
-            return (await fetch('https://corsproxy.io/?url=https://users.roblox.com/v1/users/' + plr)).json()
+            return (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://users.roblox.com/v1/users/' + plr)}`)).json()
         } catch (error) {
             alert(error.message)
         }
     }
+
+    var ImportantPlayerInfo = {
+        "Description": 3,
+        "Created": 7,
+        "Banned": 10,
+        "Verified": 14,
+        "id": 16,
+        "Name": 19,
+        "Display": 23
+    }
+
     function addToList(list, Main, Sub) {
         Sub = Sub.replace(",", '').replace(":", '').replace("\\n", "<br/>")
         list.push(Main + Sub)
@@ -74,7 +85,6 @@ html, body {
         if (document.getElementById("picker").value == "Player") {
             (async () => {
                 var info = await PlayerInfo(document.getElementById("SearchBar").value)
-                alert(info)
                 info = Extract_Player_Info(info.contents)
                 document.getElementById("InfoBox").innerHTML = info
             })()
